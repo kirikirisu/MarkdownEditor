@@ -1,0 +1,19 @@
+.button {
+  background-color: rgb(176, 99, 155);
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-top-left-radius: 10px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  align-content: baseline;
+}
+
+.buttonText {
+  padding: 0.95rem;
+  line-height: 0px;
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+}

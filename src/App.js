@@ -5,7 +5,8 @@ import marked from 'marked';
 
 import PostSettingButton from './component/PostSettingButton';
 import SettingSlide from './component/SettingSlide';
-import './App.css';
+import Inner from './component/InnerSlide';
+import styles from './App.module.css';
 
 import 'ace-builds/src-noconflict/mode-markdown';
 import 'ace-builds/src-noconflict/theme-solarized_dark';
@@ -28,8 +29,8 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <div className="body">
+    <div className={styles.container}>
+      <div className={styles.body}>
         <AceEditor
           mode="markdown"
           theme="solarized_dark"
@@ -44,9 +45,9 @@ const App = () => {
           }}
           keyboardHandler="vim"
         />
-        <div className="preview">{renderPreview()}</div>
+        <div className={styles.preview}>{renderPreview()}</div>
       </div>
-      <SettingSlide show={isOpen} />
+      <SettingSlide show={isOpen}><Inner /></SettingSlide>
       <PostSettingButton toggle={toggle} />
     </div>
   );

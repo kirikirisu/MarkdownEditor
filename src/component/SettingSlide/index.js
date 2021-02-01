@@ -8,7 +8,7 @@ const defaultStyle = {
   bottom: '0px',
   width: '0px',
   height: '100%',
-  backgroundColor: 'red',
+  backgroundColor: 'rgb(254, 235, 225)',
 };
 
 const transitionStyles = {
@@ -26,10 +26,12 @@ const transitionStyles = {
   },
 };
 
-const SettingSlide = ({ show }) => (
-  <Transition in={show} timeout={400}>
+const SettingSlide = ({ show, children }) => (
+  <Transition in={show} timeout={400} appear>
     {(state) => (
-      <div style={{ ...defaultStyle, ...transitionStyles[state] }} />
+      <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
+        {children}
+      </div>
     )}
   </Transition>
 );
