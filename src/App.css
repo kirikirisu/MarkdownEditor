@@ -1,4 +1,10 @@
 .container{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.body{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,5 +15,4 @@
 .preview {
   width: 50%;
   height: 100%;
-  background-color: cyan;
 }

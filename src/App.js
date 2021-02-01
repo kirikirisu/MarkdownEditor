@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import AceEditor from 'react-ace';
 import marked from 'marked';
 
+import PostSettingButton from './component/PostSettingButton';
+import SettingSlide from './component/SettingSlide';
 import './App.css';
 
-import 'ace-builds/src-noconflict/mode-java';
-import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/mode-markdown';
+import 'ace-builds/src-noconflict/theme-solarized_dark';
+import 'ace-builds/src-noconflict/keybinding-vim';
 
 const onChangeEditorText = (md, setHtml, setMd) => {
   setMd(md);
@@ -16,21 +19,35 @@ const onChangeEditorText = (md, setHtml, setMd) => {
 const App = () => {
   const [inputMd, setMd] = useState('');
   const [html, setHtml] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const renderPreview = () => <div dangerouslySetInnerHTML={{ __html: html }} />;
 
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="container">
-      <AceEditor
-        mode="java"
-        theme="github"
-        name="mdEditor"
-        width="50%"
-        height="100%"
-        value={inputMd}
-        onChange={(md) => onChangeEditorText(md, setHtml, setMd)}
-      />
-      <div className="preview">{renderPreview()}</div>
+      <div className="body">
+        <AceEditor
+          mode="markdown"
+          theme="solarized_dark"
+          name="mdEditor"
+          width="50%"
+          height="100%"
+          value={inputMd}
+          onChange={(md) => onChangeEditorText(md, setHtml, setMd)}
+          fontSize={18}
+          setOptions={{
+            enableBasicAutocompletion: true,
+          }}
+          keyboardHandler="vim"
+        />
+        <div className="preview">{renderPreview()}</div>
+      </div>
+      <SettingSlide show={isOpen} />
+      <PostSettingButton toggle={toggle} />
     </div>
   );
 };
