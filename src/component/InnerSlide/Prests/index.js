@@ -8,7 +8,7 @@ import { IconContext } from 'react-icons';
 
 import styles from './style.module.css';
 
-const Prests = ({ state }) => (
+const Prests = ({ state, setAddPreset }) => (
   <div className={styles.container}>
     {
       (state === 'entered') ? (
@@ -17,7 +17,7 @@ const Prests = ({ state }) => (
             プリセット
           </p>
           <IconContext.Provider value={{ color: 'rgb(116, 187, 150)', className: `${styles.icon}`, size: '3rem' }}>
-            <div onClick={() => { console.log('click'); }}>
+            <div onClick={() => { setAddPreset((prev) => !prev); }}>
               <BsFillPlusCircleFill />
             </div>
           </IconContext.Provider>

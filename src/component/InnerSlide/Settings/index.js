@@ -1,8 +1,19 @@
 import React from 'react';
-import styles from './style.module.css';
 
-const Settings = () => (
-  <div className={styles.container}>settings</div>
+import PostSettingPage from './PostSettingPage';
+import styles from './style.module.css';
+import SchemaSettingPage from './SchemaSettingPage';
+
+const Settings = ({ addPreset }) => (
+  <div className={styles.container}>
+    {
+      addPreset ? (
+        <SchemaSettingPage />
+      ) : (
+        <PostSettingPage />
+      )
+    }
+  </div>
 );
 
 export default Settings;
