@@ -5,7 +5,6 @@ import marked from 'marked';
 
 import PostSettingButton from './component/PostSettingButton';
 import SettingSlide from './component/SettingSlide';
-import Inner from './component/InnerSlide';
 import styles from './App.module.css';
 
 import 'ace-builds/src-noconflict/mode-markdown';
@@ -47,7 +46,7 @@ const App = () => {
         />
         <div className={styles.preview}>{renderPreview()}</div>
       </div>
-      <SettingSlide show={isOpen}><Inner /></SettingSlide>
+      <SettingSlide show={isOpen} />
       <PostSettingButton toggle={toggle} />
     </div>
   );
