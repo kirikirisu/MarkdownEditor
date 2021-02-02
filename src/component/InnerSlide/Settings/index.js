@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PostSettingPage from './PostSettingPage';
 import styles from './style.module.css';
 import SchemaSettingPage from './SchemaSettingPage';
 
-const Settings = ({ addPreset }) => (
+const Settings = ({ isPresetPage, setPreset }) => (
   <div className={styles.container}>
     {
-      addPreset ? (
-        <SchemaSettingPage />
+      isPresetPage ? (
+        <SchemaSettingPage setPreset={setPreset} />
       ) : (
         <PostSettingPage />
       )

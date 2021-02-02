@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React from 'react';
 
-const FieldSetting = ({
+const CurrentField = ({
   fieldName, category, sfn, sc,
 }) => (
   <div>
@@ -16,4 +16,4 @@ const FieldSetting = ({
   </div>
 );
 
-export default FieldSetting;
+export default CurrentField;

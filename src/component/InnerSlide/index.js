@@ -6,11 +6,13 @@ import Settings from './Settings';
 
 const InnerSlide = ({ state }) => {
   // default false
-  const [addPreset, setAddPreset] = useState(true);
+  const [isPresetPage, setIsPresetPage] = useState(true);
+  const [presets, setPreset] = useState([]);
+
   return (
     <div className={styles.container}>
-      <Prests state={state} setAddPreset={setAddPreset} />
-      <Settings addPreset={addPreset} />
+      <Prests state={state} setIsPresetPage={setIsPresetPage} />
+      <Settings isPresetPage={isPresetPage} setPreset={setPreset} />
     </div>
   );
 };

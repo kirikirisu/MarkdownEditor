@@ -8,7 +8,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
-import CurrentField from './FieldSetting';
+import CurrentField from './CurrentField';
 
 const PastField = ({
   v, i, updateHistory, setUpdateHistory,
@@ -16,10 +16,10 @@ const PastField = ({
   const key = Object.keys(v)[0];
   const [fieldName, setFieldName] = useState(key);
   const [category, setCategory] = useState(v[key]);
-  const updateField = {};
-  updateField[fieldName] = category;
 
   useEffect(() => {
+    const updateField = {};
+    updateField[fieldName] = category;
     stackUpdate(i, updateField, updateHistory, setUpdateHistory);
   }, [fieldName, category]);
 
@@ -59,26 +59,25 @@ const stackUpdate = (updateIndex, updateField, updateHistory, setUpdateHistory) 
     for (let i = 0; i < updateHistory.length; i++) {
       if (updateIndex === updateHistory[i][0]) {
         newUpdateHistory[i] = updateInfor;
-        console.log('update1');
         setUpdateHistory(newUpdateHistory);
       }
     }
   } else {
-    console.log('update2');
     newUpdateHistory.push(updateInfor);
     setUpdateHistory(newUpdateHistory);
   }
 };
 
-const SchemaSettingPage = () => {
+const SchemaSettingPage = ({ setPreset }) => {
   const [schema, setField] = useState([]);
   const [fieldName, setFieldName] = useState('');
   const [category, setCategory] = useState('text');
+  const [presetTitle, setPresetTitle] = useState('');
 
-  // updateHistory = [[number, obj]]
+  // updateHistory = [[number, Object]]
   const [updateHistory, setUpdateHistory] = useState([]);
 
-  const onClick = () => {
+  const onClickAdd = () => {
     const field = {};
     const newSchema = [...schema];
 
@@ -89,6 +88,30 @@ const SchemaSettingPage = () => {
     setFieldName('');
     setCategory('text');
   };
+
+  const onClickDone = () => {
+    const lastFieldValue = {};
+    const parsedHistory = [];
+
+    // ユーザーがすでに追加したフィールドを修正した場合、
+    // 更新状態は全てupdateHistoryに入っている
+    // [[0, {hoge: hoge}],[1, {huga: huga}]] => [{hoge: hoge}, {huga: huga}]
+    for (let i = 0; i < updateHistory.length; i++) {
+      parsedHistory.push(updateHistory[i][1]);
+    }
+
+    // 最後のフィールド情報だけ更新状態に入っていないため追加する
+    lastFieldValue[fieldName] = category;
+    parsedHistory.push(lastFieldValue);
+
+    const preset = { title: presetTitle, presetSchema: parsedHistory };
+    setPreset((prev) => {
+      const nextState = [...prev];
+      nextState.push(preset);
+      return (nextState);
+    });
+  };
+
   console.log('history', updateHistory);
   console.log('schema', schema);
 
@@ -111,7 +134,10 @@ const SchemaSettingPage = () => {
           <CurrentField fieldName={fieldName} category={category} sfn={setFieldName} sc={setCategory} />
         )}
       </div>
-      <button onClick={() => onClick()}>add</button>
+      <button onClick={() => onClickAdd()}>add</button>
+      <button onClick={() => onClickDone()}>done</button>
+      <label>プリセットタイトル</label>
+      <input type="text" value={presetTitle} onChange={(e) => setPresetTitle(e.target.value)} />
     </div>
   );
 };
