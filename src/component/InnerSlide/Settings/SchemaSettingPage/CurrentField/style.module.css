@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	padding: 0.7rem 0;
+}
+
+.labels {
+  color: rgb(48, 18, 40);
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.fieldName {
+  width: 40%;
+	padding-right: 0.5rem;
+}
+
+.fieldName [type="text"] {
+  box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #aaaaaa;
+	border: 0.1rem solid rgb(48, 18, 40);
+	border-radius: 4px;
+}
+
+/*https://techacademy.jp/magazine/24133*/
+.selectbox {
+	position: relative;
+}
+
+select {
+	-webkit-appearance:none;
+    appearance:none;
+  padding: 0.3em;
+  box-sizing:border-box;
+  border: rgb(48, 18, 40) 0.1rem solid;
+	border-radius:0;
+	border-radius: 4px;
+}

@@ -8,7 +8,12 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+import { IconContext } from 'react-icons';
+import { FaArrowRight } from 'react-icons/fa';
+
 import CurrentField from './CurrentField';
+import styles from './style.module.css';
+import fieldStyles from './CurrentField/style.module.css';
 
 const PastField = ({
   v, i, updateHistory, setUpdateHistory,
@@ -24,16 +29,22 @@ const PastField = ({
   }, [fieldName, category]);
 
   return (
-    <div>
-      <label>フィールド名</label>
-      <input type="text" value={fieldName} onChange={(e) => setFieldName(e.target.value)} />
-      <label>種類</label>
-      <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="text">テキスト</option>
-        <option value="date">日時</option>
-        <option value="boolean">真偽値</option>
-        <option value="markdown">マークダウン</option>
-      </select>
+    <div className={fieldStyles.container}>
+      <div className={fieldStyles.fieldName}>
+        <div className={fieldStyles.labels}>フィールド名</div>
+        <input type="text" value={fieldName} onChange={(e) => setFieldName(e.target.value)} />
+      </div>
+      <div>
+        <div className={fieldStyles.labels}>種類</div>
+        <div classNa={fieldStyles.selectbox}>
+          <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="text">テキスト</option>
+            <option value="date">日時</option>
+            <option value="boolean">真偽値</option>
+            <option value="markdown">マークダウン</option>
+          </select>
+        </div>
+      </div>
     </div>
   );
 };
@@ -119,28 +130,41 @@ const SchemaSettingPage = ({ setPreset }) => {
   console.log('schema', schema);
 
   return (
-    <div>
-      <div>
-        {(schema.length !== 0) ? (
-          <div>
-            <div>
-              {schema.map((value, i) => {
-                const key = Object.keys(value)[0];
-                return (
-                  <PastField key={key} v={value} i={i} updateHistory={updateHistory} setUpdateHistory={setUpdateHistory} />
-                );
-              })}
-            </div>
-            <CurrentField fieldName={fieldName} category={category} sfn={setFieldName} sc={setCategory} />
-          </div>
-        ) : (
-          <CurrentField fieldName={fieldName} category={category} sfn={setFieldName} sc={setCategory} />
-        )}
+    <div className={styles.container}>
+      <div className={styles.title}>APIスキーマを定義</div>
+      <div className={styles.inputPresetContaienr}>
+        <div className={styles.presetTitleLabel}>プリセットタイトル</div>
+        <input type="text" value={presetTitle} onChange={(e) => setPresetTitle(e.target.value)} />
       </div>
-      <button onClick={() => onClickAdd()}>add</button>
-      <button onClick={() => onClickDone()}>done</button>
-      <label>プリセットタイトル</label>
-      <input type="text" value={presetTitle} onChange={(e) => setPresetTitle(e.target.value)} />
+      <div className={styles.listArea}>
+        <div>
+          {(schema.length !== 0) ? (
+            <div>
+              <div>
+                {schema.map((value, i) => {
+                  const key = Object.keys(value)[0];
+                  return (
+                    <PastField key={key} v={value} i={i} updateHistory={updateHistory} setUpdateHistory={setUpdateHistory} />
+                  );
+                })}
+              </div>
+              <CurrentField fieldName={fieldName} category={category} sfn={setFieldName} sc={setCategory} />
+            </div>
+          ) : (
+            <CurrentField fieldName={fieldName} category={category} sfn={setFieldName} sc={setCategory} />
+          )}
+        </div>
+        <button className={styles.addButton} onClick={() => onClickAdd()}>追加</button>
+      </div>
+      <div className={styles.back}>
+        <p className={styles.backText}>閉じる</p>
+        <IconContext.Provider value={{ color: 'rgb(48, 18, 40)', className: `${styles.icon}`, size: '2.3rem' }}>
+          <div>
+            <FaArrowRight />
+          </div>
+        </IconContext.Provider>
+      </div>
+      <button className={styles.doneButton} onClick={() => onClickDone()}>完了</button>
     </div>
   );
 };

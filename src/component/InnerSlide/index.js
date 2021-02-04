@@ -29,7 +29,13 @@ const InnerSlide = ({ state }) => {
         setCurrentPreset={setCurrentPreset}
         presets={presets}
       />
-      <Settings isPresetPage={isPresetPage} setPreset={setPreset} presets={presets} currentPreset={currentPreset} />
+      <Settings
+        state={state}
+        isPresetPage={isPresetPage}
+        setPreset={setPreset}
+        presets={presets}
+        currentPreset={currentPreset}
+      />
     </div>
   );
 };

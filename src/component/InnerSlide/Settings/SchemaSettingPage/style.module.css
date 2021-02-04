@@ -1,0 +1,87 @@
+.container {
+  padding: 1.7rem 4.5rem;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+.listArea {
+  overflow: scroll;
+  height: 50vh;
+  padding: 1rem;
+  margin:1.5rem 0;
+  border: 0;
+  background-color: rgb(245, 239, 234);
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 3.1rem;
+  color: rgb(48, 18, 40);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.inputPresetContaienr {
+  padding: 1rem 0;
+  width: 40%;
+}
+
+.presetTitleLabel {
+  color: rgb(48, 18, 40);
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.inputPresetContaienr input[type="text"] {
+  box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #aaaaaa;
+	border: 0.1rem solid rgb(48, 18, 40);
+	border-radius: 4px;
+}
+
+.addButton {
+  font-size: 1.5rem;
+  padding: 0.3rem 2rem;
+  margin: 1rem 0;
+  background-color: rgb(116, 187, 150);
+  color: rgb(255, 255, 255);
+  border: 0 solid rgb(116, 187, 150);
+	border-radius: 4px;
+}
+
+.doneButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(237, 131, 95);
+  border-top-left-radius: 10px;
+  color: rgb(255, 255, 255);
+  padding: 1rem 2.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  border: 0;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.backText {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color:rgb(48, 18, 40);
+  margin-right: 0.5rem;
+  padding-left: 0.4rem;
+  margin-left: 0.3rem;
+  border-left: 0.15rem solid rgb(48, 18, 40);
+}

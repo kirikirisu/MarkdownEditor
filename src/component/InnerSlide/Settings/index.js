@@ -5,14 +5,22 @@ import styles from './style.module.css';
 import SchemaSettingPage from './SchemaSettingPage';
 
 const Settings = ({
-  isPresetPage, setPreset, presets, currentPreset,
+  state, isPresetPage, setPreset, presets, currentPreset,
 }) => (
   <div className={styles.container}>
     {
-      isPresetPage ? (
-        <SchemaSettingPage setPreset={setPreset} />
+      (state === 'entered') ? (
+        <div>
+          {
+            isPresetPage ? (
+              <SchemaSettingPage setPreset={setPreset} />
+            ) : (
+              <PostSettingPage presets={presets} currentPreset={currentPreset} />
+            )
+          }
+        </div>
       ) : (
-        <PostSettingPage presets={presets} currentPreset={currentPreset} />
+        <div />
       )
     }
   </div>

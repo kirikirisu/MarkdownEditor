@@ -13,10 +13,10 @@ const defaultStyle = {
 
 const transitionStyles = {
   entering: {
-    width: '80%',
+    width: '70%',
   },
   entered: {
-    width: '80%',
+    width: '70%',
   },
   exiting: {
     width: '0px',

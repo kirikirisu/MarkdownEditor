@@ -3,9 +3,17 @@
 import React from 'react';
 import styles from './style.module.css';
 
-const PostSettingButton = ({ toggle }) => (
-  <div className={styles.button} onClick={() => toggle()}>
-    <p className={styles.buttonText}>POST SETTING</p>
+const PostSettingButton = ({ toggle, isOpen }) => (
+  <div>
+    {
+      isOpen ? (
+        <div />
+      ) : (
+        <div className={styles.button} onClick={() => toggle()}>
+          <p className={styles.buttonText}>POST SETTING</p>
+        </div>
+      )
+    }
   </div>
 );
 
