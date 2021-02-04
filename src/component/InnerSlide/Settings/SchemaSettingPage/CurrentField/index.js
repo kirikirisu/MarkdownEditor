@@ -12,6 +12,7 @@ const CurrentField = ({
       <option value="text">テキスト</option>
       <option value="date">日時</option>
       <option value="boolean">真偽値</option>
+      <option value="markdown">マークダウン</option>
     </select>
   </div>
 );

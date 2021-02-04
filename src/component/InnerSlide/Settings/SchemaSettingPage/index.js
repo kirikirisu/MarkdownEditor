@@ -32,6 +32,7 @@ const PastField = ({
         <option value="text">テキスト</option>
         <option value="date">日時</option>
         <option value="boolean">真偽値</option>
+        <option value="markdown">マークダウン</option>
       </select>
     </div>
   );
@@ -108,6 +109,8 @@ const SchemaSettingPage = ({ setPreset }) => {
     setPreset((prev) => {
       const nextState = [...prev];
       nextState.push(preset);
+
+      localStorage.setItem('presets', JSON.stringify(nextState));
       return (nextState);
     });
   };
