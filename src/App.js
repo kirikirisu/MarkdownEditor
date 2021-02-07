@@ -46,7 +46,7 @@ const App = () => {
         />
         <div className={styles.preview}>{renderPreview()}</div>
       </div>
-      <SettingSlide show={isOpen} />
+      <SettingSlide toggleSlide={toggle} show={isOpen} />
       <PostSettingButton toggle={toggle} isOpen={isOpen} />
     </div>
   );

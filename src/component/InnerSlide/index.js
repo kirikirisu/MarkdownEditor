@@ -5,7 +5,7 @@ import * as styles from './style.module.css';
 import Prests from './Prests';
 import Settings from './Settings';
 
-const InnerSlide = ({ state }) => {
+const InnerSlide = ({ state, toggleSlide }) => {
   // default false
   const [isPresetPage, setIsPresetPage] = useState(true);
   const [presets, setPreset] = useState([]);
@@ -35,6 +35,8 @@ const InnerSlide = ({ state }) => {
         setPreset={setPreset}
         presets={presets}
         currentPreset={currentPreset}
+        toggleSlide={toggleSlide}
+        setIsPresetPage={setIsPresetPage}
       />
     </div>
   );

@@ -26,11 +26,11 @@ const transitionStyles = {
   },
 };
 
-const SettingSlide = ({ show }) => (
+const SettingSlide = ({ show, toggleSlide }) => (
   <Transition in={show} timeout={400} appear>
     {(state) => (
       <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
-        <InnerSlide state={state} />
+        <InnerSlide state={state} toggleSlide={toggleSlide} />
       </div>
     )}
   </Transition>

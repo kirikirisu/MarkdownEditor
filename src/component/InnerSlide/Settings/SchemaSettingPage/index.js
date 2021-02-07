@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-undef */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
@@ -80,13 +82,15 @@ const stackUpdate = (updateIndex, updateField, updateHistory, setUpdateHistory) 
   }
 };
 
-const SchemaSettingPage = ({ setPreset }) => {
+const validateInput = (fieldName, presetTitle) => (fieldName !== '' && presetTitle !== '');
+
+const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
   const [schema, setField] = useState([]);
   const [fieldName, setFieldName] = useState('');
   const [category, setCategory] = useState('text');
   const [presetTitle, setPresetTitle] = useState('');
 
-  // updateHistory = [[number, Object]]
+  // updateHistory = [[number, Object],]
   const [updateHistory, setUpdateHistory] = useState([]);
 
   const onClickAdd = () => {
@@ -102,28 +106,35 @@ const SchemaSettingPage = ({ setPreset }) => {
   };
 
   const onClickDone = () => {
-    const lastFieldValue = {};
-    const parsedHistory = [];
+    if (validateInput(fieldName, presetTitle)) {
+      const lastFieldValue = {};
+      const parsedHistory = [];
 
-    // ユーザーがすでに追加したフィールドを修正した場合、
-    // 更新状態は全てupdateHistoryに入っている
-    // [[0, {hoge: hoge}],[1, {huga: huga}]] => [{hoge: hoge}, {huga: huga}]
-    for (let i = 0; i < updateHistory.length; i++) {
-      parsedHistory.push(updateHistory[i][1]);
+      // ユーザーがすでに追加したフィールドを修正した場合、
+      // 更新状態は全てupdateHistoryに入っている
+      // [[0, {hoge: hoge}],[1, {huga: huga}]] => [{hoge: hoge}, {huga: huga}]
+      for (let i = 0; i < updateHistory.length; i++) {
+        parsedHistory.push(updateHistory[i][1]);
+      }
+
+      // 最後のフィールド情報だけ更新状態に入っていないため追加する
+      lastFieldValue[fieldName] = category;
+      parsedHistory.push(lastFieldValue);
+
+      const preset = { title: presetTitle, presetSchema: parsedHistory };
+      setPreset((prev) => {
+        const nextState = [...prev];
+        nextState.push(preset);
+
+        localStorage.setItem('presets', JSON.stringify(nextState));
+        return (nextState);
+      });
+
+      // clear input
+      setIsPresetPage((prev) => !prev);
+    } else {
+      alert('入力してください');
     }
-
-    // 最後のフィールド情報だけ更新状態に入っていないため追加する
-    lastFieldValue[fieldName] = category;
-    parsedHistory.push(lastFieldValue);
-
-    const preset = { title: presetTitle, presetSchema: parsedHistory };
-    setPreset((prev) => {
-      const nextState = [...prev];
-      nextState.push(preset);
-
-      localStorage.setItem('presets', JSON.stringify(nextState));
-      return (nextState);
-    });
   };
 
   console.log('history', updateHistory);
@@ -156,15 +167,8 @@ const SchemaSettingPage = ({ setPreset }) => {
         </div>
         <button className={styles.addButton} onClick={() => onClickAdd()}>追加</button>
       </div>
-      <div className={styles.back}>
-        <p className={styles.backText}>閉じる</p>
-        <IconContext.Provider value={{ color: 'rgb(48, 18, 40)', className: `${styles.icon}`, size: '2.3rem' }}>
-          <div>
-            <FaArrowRight />
-          </div>
-        </IconContext.Provider>
-      </div>
       <button className={styles.doneButton} onClick={() => onClickDone()}>完了</button>
+      <button className={styles.backButton} onClick={() => toggleSlide()}>CLOSE</button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import styles from './style.module.css';
 import SchemaSettingPage from './SchemaSettingPage';
 
 const Settings = ({
-  state, isPresetPage, setPreset, presets, currentPreset,
+  state, isPresetPage, setPreset, presets, currentPreset, toggleSlide, setIsPresetPage,
 }) => (
   <div className={styles.container}>
     {
@@ -13,7 +13,11 @@ const Settings = ({
         <div>
           {
             isPresetPage ? (
-              <SchemaSettingPage setPreset={setPreset} />
+              <SchemaSettingPage
+                setPreset={setPreset}
+                toggleSlide={toggleSlide}
+                setIsPresetPage={setIsPresetPage}
+              />
             ) : (
               <PostSettingPage presets={presets} currentPreset={currentPreset} />
             )

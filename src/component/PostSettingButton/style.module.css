@@ -11,9 +11,10 @@
 }
 
 .buttonText {
-  padding: 1.0rem 1.15rem;
+  padding: 0.8rem 1.15rem;
   font-size: 1.65rem;
   line-height: 0px;
   font-weight: bold;
   color: white;
+  line-height: 0px;
 }
