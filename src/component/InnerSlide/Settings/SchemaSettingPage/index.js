@@ -23,19 +23,41 @@ const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
   const [presetTitle, setPresetTitle] = useState('');
 
   const onClickAdd = () => {
-    const id = Date.now();
-    const field = {};
-    field[crFieldName] = crFieldCategory;
-    const newSchema = { ...schema, [id]: field };
+    if (crFieldName !== '') {
+      const id = Date.now();
+      const field = {};
+      field[crFieldName] = crFieldCategory;
+      const newSchema = { ...schema, [id]: field };
 
-    setSchema(newSchema);
+      setSchema(newSchema);
 
-    setCrFieldName('');
-    setCrFieldCategory('text');
+      setCrFieldName('');
+      setCrFieldCategory('text');
+    } else {
+      alert('入力してください');
+    }
   };
 
   const onClickDone = () => {
+    if (crFieldName !== '' && presetTitle !== '') {
+      const preset = { title: presetTitle, preset: schema };
+      setPreset((prev) => {
+        const newPrests = [...prev, preset];
+
+        localStorage.setItem('presets', JSON.stringify(newPrests));
+        return newPrests;
+      });
+
+      // clear input
+      setSchema({});
+      setCrFieldName('');
+      setCrFieldCategory('text');
+      setPresetTitle('');
+    } else {
+      alert('入力してください');
+    }
   };
+
   console.log('schema', schema);
 
   return (

@@ -9,14 +9,15 @@ const PresetList = ({ presets, setCurrentPreset }) => {
     setCurrentPreset(index);
   };
 
+  // initialize
   useEffect(() => {
     setCurrentPreset(0);
   }, []);
 
   return (
     <div>
-      {presets.map((pre, i) => (
-        <div key={pre.title} onClick={() => onClick(i)}>{pre.title}</div>
+      {presets.map((val, i) => (
+        <div key={val.title} onClick={() => onClick(i)}>{val.title}</div>
       ))}
     </div>
   );

@@ -6,15 +6,12 @@ import Prests from './Prests';
 import Settings from './Settings';
 
 const InnerSlide = ({ state, toggleSlide }) => {
-  // default false
   const [isPresetPage, setIsPresetPage] = useState(true);
   const [presets, setPreset] = useState([]);
   const [currentPreset, setCurrentPreset] = useState('');
-  console.log('aniSta', state);
 
   useEffect(() => {
     const pastPrests = JSON.parse(localStorage.getItem('presets'));
-    // console.log('pastPresets', pastPrests);
     if (pastPrests) {
       setPreset(pastPrests);
     }

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -9,65 +10,55 @@ import InputBoolean from './InputBoolean';
 import DisplayArticle from './DisplayArticle';
 import styles from './style.module.css';
 
-const SwitchInputType = ({
-  fieldName, field, setPostValues, postValues,
-}) => {
-  const inputType = field[fieldName];
+const SwitchInputType = (props) => {
+  const {
+    id, field, fieldName, setPostValues, postValues,
+  } = props;
 
-  switch (inputType) {
+  const category = field[fieldName];
+
+  switch (category) {
     case 'text':
       return (
-        <InputText setPostValues={setPostValues} fieldName={fieldName} postValues={postValues} />
-      );
-    case 'markdown':
-      return (
-        <div>into edited articl</div>
-      );
-    case 'date':
-      return (
-        <InputDate setPostValues={setPostValues} fieldName={fieldName} postValues={postValues} />
-      );
-    case 'boolean':
-      return (
-        <InputBoolean setPostValues={setPostValues} fieldName={fieldName} postValues={postValues} />
+        <InputText {...props} />
       );
     default:
+      return <div />;
   }
 };
 
 const PostSettingPage = ({ presets, currentPreset }) => {
   const [schema, setSchema] = useState([]);
 
-  const [postValues, setPostValues] = useState([]);
-  // console.log('postPres', presets);
-  // console.log('postCurPre', currentPreset);
-  console.log('postSchema', schema);
-  console.log('postValues', postValues);
+  const [postValues, setPostValues] = useState({});
 
   useEffect(() => {
     if (presets.length !== 0) {
-      setSchema(presets[currentPreset].presetSchema);
+      setSchema(presets[currentPreset].preset);
     }
   }, [presets, currentPreset]);
 
+  console.log('postValues', postValues);
   return (
     <div className={styles.container}>
       {
-        (schema.length === 0) ? (
+        (Object.keys(schema).length === 0) ? (
           <div>プリセットを追加してください</div>
         ) : (
           <div className={styles.inputsContainer}>
             {
-              schema.map((field) => {
+              Object.keys(schema).map((id) => {
+                const field = schema[id];
                 const fieldName = Object.keys(field)[0];
 
+                console.log('fieldName', fieldName);
                 return (
-                  <div key={fieldName} className={styles.input}>
+                  <div key={id} className={styles.input}>
                     <label className={styles.inputLabel}>{fieldName}</label>
                     <SwitchInputType
-                      key={fieldName}
-                      fieldName={fieldName}
+                      id={id}
                       field={field}
+                      fieldName={fieldName}
                       setPostValues={setPostValues}
                       postValues={postValues}
                     />
