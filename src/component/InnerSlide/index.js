@@ -10,7 +10,7 @@ const InnerSlide = ({ state, toggleSlide }) => {
   const [isPresetPage, setIsPresetPage] = useState(true);
   const [presets, setPreset] = useState([]);
   const [currentPreset, setCurrentPreset] = useState('');
-  console.log('curPre', currentPreset);
+  console.log('aniSta', state);
 
   useEffect(() => {
     const pastPrests = JSON.parse(localStorage.getItem('presets'));
