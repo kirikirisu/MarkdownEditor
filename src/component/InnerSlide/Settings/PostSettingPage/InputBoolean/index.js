@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const InputBoolean = ({ setPostValues, fieldName, postValues }) => {
-  const [check, setCheck] = useState();
-  console.log('check', check);
+const InputBoolean = ({
+  id, field, fieldName, setPostValues, postValues,
+}) => {
+  const [check, setCheck] = useState(false);
 
-  useEffect(() => {
-  }, [check]);
+  const onChange = (e) => {
+    const v = e.target.checked;
+    setCheck(v);
+
+    const val = {};
+    val[fieldName] = v;
+
+    const newVals = { ...postValues, [id]: val };
+    setPostValues(newVals);
+  };
 
   return (
     <input
       type="checkbox"
-      onChange={(e) => setCheck(e.target.checked)}
+      onChange={(e) => onChange(e)}
       checked={check}
     />
   );

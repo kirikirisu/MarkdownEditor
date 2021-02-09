@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
 
 import InputText from './InputText';
@@ -12,7 +13,7 @@ import styles from './style.module.css';
 
 const SwitchInputType = (props) => {
   const {
-    id, field, fieldName, setPostValues, postValues,
+    field, fieldName,
   } = props;
 
   const category = field[fieldName];
@@ -22,36 +23,44 @@ const SwitchInputType = (props) => {
       return (
         <InputText {...props} />
       );
+    case 'date':
+      return (
+        <InputDate {...props} />
+      );
+    case 'boolean':
+      return (
+        <InputBoolean {...props} />
+      );
+    case 'markdown':
+      return (
+        <DisplayArticle />
+      );
     default:
       return <div />;
   }
 };
 
 const PostSettingPage = ({ presets, currentPreset }) => {
-  const [schema, setSchema] = useState([]);
-
   const [postValues, setPostValues] = useState({});
+  let preset;
 
-  useEffect(() => {
-    if (presets.length !== 0) {
-      setSchema(presets[currentPreset].preset);
-    }
-  }, [presets, currentPreset]);
+  if (presets.length !== 0) {
+    const { preset: pre } = presets[currentPreset];
+    preset = pre;
+  }
 
-  console.log('postValues', postValues);
   return (
     <div className={styles.container}>
       {
-        (Object.keys(schema).length === 0) ? (
+        (presets.length === 0) ? (
           <div>プリセットを追加してください</div>
         ) : (
           <div className={styles.inputsContainer}>
             {
-              Object.keys(schema).map((id) => {
-                const field = schema[id];
+              Object.keys(preset).map((id) => {
+                const field = preset[id];
                 const fieldName = Object.keys(field)[0];
 
-                console.log('fieldName', fieldName);
                 return (
                   <div key={id} className={styles.input}>
                     <label className={styles.inputLabel}>{fieldName}</label>

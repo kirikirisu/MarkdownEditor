@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-const InputDate = ({ setPostValues, fieldName, postValues }) => {
+const InputDate = ({
+  id, field, fieldName, setPostValues, postValues,
+}) => {
   const [date, setDate] = useState('');
 
-  useEffect(() => {
-  }, [date]);
+  const onChange = (e) => {
+    const v = e.target.value;
+    setDate(v);
+
+    const val = {};
+    val[fieldName] = v;
+
+    const newVals = { ...postValues, [id]: val };
+    setPostValues(newVals);
+  };
 
   return (
-    <input type="datetime-local" onChange={(e) => setDate(e.target.value)} value={date} />
+    <input type="datetime-local" onChange={(e) => onChange(e)} value={date} />
   );
 };
 

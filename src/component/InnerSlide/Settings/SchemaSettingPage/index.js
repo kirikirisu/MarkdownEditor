@@ -40,7 +40,13 @@ const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
 
   const onClickDone = () => {
     if (crFieldName !== '' && presetTitle !== '') {
-      const preset = { title: presetTitle, preset: schema };
+      // 最後の入力はaddボタンは押されない
+      const id = Date.now();
+      const lastField = {};
+      lastField[crFieldName] = crFieldCategory;
+      const newSchema = { ...schema, [id]: lastField };
+
+      const preset = { title: presetTitle, preset: newSchema };
       setPreset((prev) => {
         const newPrests = [...prev, preset];
 
@@ -58,7 +64,7 @@ const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
     }
   };
 
-  console.log('schema', schema);
+  // console.log('schemaS', schema);
 
   return (
     <div className={styles.container}>

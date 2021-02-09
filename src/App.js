@@ -1,5 +1,6 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useState, createContext } from 'react';
 import AceEditor from 'react-ace';
 import marked from 'marked';
 
@@ -15,6 +16,8 @@ const onChangeEditorText = (md, setHtml, setMd) => {
   setMd(md);
   setHtml(marked(md));
 };
+
+export const BodyContext = createContext();
 
 const App = () => {
   const [inputMd, setMd] = useState('');
@@ -46,7 +49,9 @@ const App = () => {
         />
         <div className={styles.preview}>{renderPreview()}</div>
       </div>
-      <SettingSlide toggleSlide={toggle} show={isOpen} />
+      <BodyContext.Provider value={html}>
+        <SettingSlide toggleSlide={toggle} show={isOpen} />
+      </BodyContext.Provider>
       <PostSettingButton toggle={toggle} isOpen={isOpen} />
     </div>
   );
