@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
+
+import styles from './style.module.css';
 
 const InputDate = ({
   id, field, fieldName, setPostValues, postValues,
@@ -17,7 +20,10 @@ const InputDate = ({
   };
 
   return (
-    <input type="datetime-local" onChange={(e) => onChange(e)} value={date} />
+    <div className={styles.inputDate}>
+      <label className={styles.label}>{fieldName}</label>
+      <input type="datetime-local" onChange={(e) => onChange(e)} value={date} />
+    </div>
   );
 };
 

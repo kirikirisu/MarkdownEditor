@@ -6,7 +6,7 @@ import * as styles from './style.module.css';
 import Prests from './Prests';
 import Settings from './Settings';
 
-const InnerSlide = ({ state, toggleSlide }) => {
+const InnerSlide = ({ state }) => {
   const [isPresetPage, setIsPresetPage] = useState(false);
   const [presets, setPreset] = useState([]);
   const [currentPreset, setCurrentPreset] = useState(0);
@@ -33,8 +33,6 @@ const InnerSlide = ({ state, toggleSlide }) => {
         setPreset={setPreset}
         presets={presets}
         currentPreset={currentPreset}
-        toggleSlide={toggleSlide}
-        setIsPresetPage={setIsPresetPage}
       />
     </div>
   );

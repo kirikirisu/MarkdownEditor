@@ -5,15 +5,17 @@ import styles from './style.module.css';
 
 const PostSettingButton = ({ toggle, isOpen }) => (
   <div>
-    {
-      isOpen ? (
-        <div />
-      ) : (
-        <div className={styles.button} onClick={() => toggle()}>
-          <p className={styles.buttonText}>POST SETTING</p>
-        </div>
-      )
-    }
+    <div className={styles.button} onClick={() => toggle()}>
+      <p className={styles.buttonText}>
+        {
+          isOpen ? (
+            'CLOSE'
+          ) : (
+            'POST SETTING'
+          )
+        }
+      </p>
+    </div>
   </div>
 );
 

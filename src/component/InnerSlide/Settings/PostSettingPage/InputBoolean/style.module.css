@@ -1,0 +1,20 @@
+.inputCheckbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.label {
+  color: rgb(48, 18, 40);
+  padding: 0 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+
+.inputCheckbox input[type="checkbox"] {
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}

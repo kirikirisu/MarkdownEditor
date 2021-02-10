@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+/* eslint-disable import/no-cycle */
+import React from 'react';
 
 import PostSettingPage from './PostSettingPage';
 import styles from './style.module.css';
 import SchemaSettingPage from './SchemaSettingPage';
 
 const Settings = ({
-  state, isPresetPage, setPreset, presets, currentPreset, toggleSlide, setIsPresetPage,
+  state, isPresetPage, setPreset, presets, currentPreset,
 }) => (
   <div className={styles.container}>
     {
@@ -15,8 +16,6 @@ const Settings = ({
             isPresetPage ? (
               <SchemaSettingPage
                 setPreset={setPreset}
-                toggleSlide={toggleSlide}
-                setIsPresetPage={setIsPresetPage}
               />
             ) : (
               <PostSettingPage presets={presets} currentPreset={currentPreset} />

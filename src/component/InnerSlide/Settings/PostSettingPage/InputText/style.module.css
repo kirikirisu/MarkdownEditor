@@ -1,0 +1,23 @@
+.inputText {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.label {
+  color: rgb(48, 18, 40);
+  padding: 0 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+
+.inputText [type="text"]{
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #aaaaaa;
+	border: 0.1rem solid rgb(48, 18, 40);
+	border-radius: 4px;
+}

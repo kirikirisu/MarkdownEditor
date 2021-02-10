@@ -50,7 +50,7 @@ const App = () => {
         <div className={styles.preview}>{renderPreview()}</div>
       </div>
       <BodyContext.Provider value={html}>
-        <SettingSlide toggleSlide={toggle} show={isOpen} />
+        <SettingSlide show={isOpen} />
       </BodyContext.Provider>
       <PostSettingButton toggle={toggle} isOpen={isOpen} />
     </div>

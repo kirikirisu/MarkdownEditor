@@ -15,7 +15,7 @@ import CurrentField from './CurrentField';
 import PastField from './PastField';
 import styles from './style.module.css';
 
-const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
+const SchemaSettingPage = ({ setPreset }) => {
   const [schema, setSchema] = useState({});
   const [crFieldName, setCrFieldName] = useState('');
   const [crFieldCategory, setCrFieldCategory] = useState('text');
@@ -91,7 +91,6 @@ const SchemaSettingPage = ({ setPreset, toggleSlide, setIsPresetPage }) => {
         <button className={styles.addButton} onClick={() => onClickAdd()}>追加</button>
       </div>
       <button className={styles.doneButton} onClick={() => onClickDone()}>完了</button>
-      <button className={styles.backButton} onClick={() => toggleSlide()}>CLOSE</button>
     </div>
   );
 };
